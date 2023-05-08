@@ -1,0 +1,220 @@
+* {
+  box-sizing: border-box;
+
+  &::after,
+  &::before {
+    box-sizing: border-box;
+  }
+}
+
+:root {
+  --ON: initial;
+  --OFF: ;
+  --columns: initial;
+  --rows: initial;
+  --font-scale: initial;
+  --primary-color: #264653;
+  --secondary-color: #2a9d8f;
+  --third-color: #e9c46a;
+  --fourth-color: #f4a261;
+  --fifth-color: #e76f51;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto Serif", serif;
+}
+
+nav {
+  overflow: hidden;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: var(--primary-color);
+
+  & ul {
+    list-style: none;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-arround;
+    gap: 4%;
+
+    & a {
+      font-size: calc(100% * var(--font-scale, 0.9));
+      text-decoration: none;
+      color: var(--third-color);
+      display: block;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--fifth-color);
+      }
+    }
+  }
+}
+
+section {
+  font-size: calc(1vw * var(--font-scale, 5));
+  max-width: 100vw;
+  height: 100vh;
+
+  &#sobre-mim {
+    background: linear-gradient(
+      90deg,
+      hsla(12, 76%, 61%, 1),
+      hsla(27, 87%, 67%, 1)
+    );
+    background-size: 200% 200%;
+    animation: change-background 5s alternate both infinite ease-in-out;
+  }
+
+  &#sobre-mim,
+  &#habilidades {
+    display: grid;
+    grid-template-columns: repeat(var(--columns, 2), 1fr);
+    grid-template-rows: repeat(var(--rows, 3), 1fr);
+  }
+
+  &#habilidades {
+    background: var(--bg-color, rgb(44, 45, 48));
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 5rem 2rem;
+    gap: 5%;
+
+    & svg {
+      object-fit: cover;
+      border-radius: 1em;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+      opacity: 0.6;
+
+      &.react {
+        --border-color: #53c1de;
+        grid-row: 1 / 2;
+        grid-column: 1 / 2;
+      }
+      &.css {
+        --border-color: #264de4;
+      }
+      &.git {
+        --border-color: #ee513b;
+      }
+      &.html {
+        --border-color: #e34f26;
+      }
+      &.javascript {
+        --border-color: #f7df1e;
+      }
+      &.redux {
+        --border-color: #764abc;
+      }
+
+      &:hover {
+        animation: pulse 1s cubic-bezier(0.5, 0, 0.5, 1) both infinite;
+        transition: opacity 0.5s ease-in-out;
+        opacity: 1;
+      }
+
+      &:active {
+        //animation: animated-svg 0s ease-in-out both;
+      }
+    }
+  }
+
+  &#contato {
+    background: var(--primary-color);
+    display: flex;
+
+    flex-flow: column wrap;
+    justify-content: center;
+
+    & form {
+      display: grid;
+      width: 80%;
+      margin: 0 auto;
+      
+
+      & input,
+      & textarea {
+        font-size: var(--font-scale);
+      }
+
+      & button {
+        --bg-color: hsl(263, 46%, 51%);
+        justify-self: flex-end;
+        padding: 0.5em 1em;
+        font-size: large;
+        border: 5px solid var(--fifth-color);
+        border-radius: 2em;
+        background: var(--fifth-color);
+        color: white;
+        cursor: pointer;
+        font-weight: bolder;
+
+        transition: all 0s;
+
+        &:hover {
+          filter: brightness(1.3);
+        }
+        &:active {
+          transform: scale(0.9);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  section {
+    --font-scale: 4;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    filter: drop-shadow(0px 0px 10px var(--border-color));
+    transform: scale(1.1);
+  }
+  50% {
+    filter: drop-shadow(0px 0px 20px var(--border-color));
+    transform: scale(1);
+  }
+  100% {
+    filter: drop-shadow(0px 0px 10px var(--border-color));
+    transform: scale(1.1);
+  }
+}
+
+@keyframes change-background {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes animated-svg{
+  0%{
+    transform: scale(1);
+  }
+  25%{
+    transform: scale(1.5);
+  }
+  50%{
+    transform: scale(3);
+  }
+  100%{
+    transform: scale(5);
+  }
+}
